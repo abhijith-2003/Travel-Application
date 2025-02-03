@@ -1,0 +1,10 @@
+node_modules/
+Frontend/node_modules/
+Frontend/node_modules/.cache/
+dist/
+dist-ssr/
+.vscode/
+.idea/
+.DS_Store
+*.log
+*.log.*

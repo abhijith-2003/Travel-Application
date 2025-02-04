@@ -1,0 +1,22 @@
+# Logs
+*.log
+*.log.*
+
+# Node modules
+node_modules/
+Frontend/node_modules/
+Frontend/node_modules/.cache/
+Backend/node_modules/
+Backend/node_modules/.cache/
+
+# Build output
+Frontend/dist/
+Backend/dist/
+
+# Environment variables
+Backend/.env
+
+# Editor directories
+.vscode/
+.idea/
+.DS_Store

@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Logs
 *.log
 *.log.*
@@ -21,15 +20,3 @@ Backend/.env
 .vscode/
 .idea/
 .DS_Store
-=======
-node_modules/
-Frontend/node_modules/
-Frontend/node_modules/.cache/
-dist/
-dist-ssr/
-.vscode/
-.idea/
-.DS_Store
-*.log
-*.log.*
->>>>>>> f8ae4c8f4c79e3cbda0c32f82439ab6058a825fe

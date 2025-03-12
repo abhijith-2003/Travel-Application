@@ -15,8 +15,8 @@ const port = process.env.PORT || 4001;
 
 // CORS configuration
 const corsOptions = {
-  origin: 'http://localhost:3000',
-  credentials: true, 
+  origin: 'http://localhost:3000', // Your frontend URL
+  credentials: true, // Allow cookies to be sent with requests
 };
 
 // MongoDB connection
@@ -25,7 +25,7 @@ mongoose.set('strictQuery', false);
 const connect = async () => {
   try {
     await mongoose.connect(process.env.MONGODB_URL);
-    console.log("MongoDB database Connected");
+    console.log("MongoDB database connected");
   } catch (error) {
     console.error("Database connection failed", error);
   }
@@ -35,6 +35,8 @@ const connect = async () => {
 app.use(express.json());
 app.use(cors(corsOptions));  
 app.use(cookieParser());
+
+// Routes
 app.use("/api/v1/auth", authRoute);
 app.use("/api/v1/tours", tourRoute);
 app.use("/api/v1/users", userRoute);

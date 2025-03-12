@@ -1,15 +1,14 @@
-import React, { useState, useContext } from 'react'
-import './booking.css'
-import { Form, FormGroup, ListGroup, ListGroupItem, Button } from 'reactstrap'
-import { useNavigate } from 'react-router-dom'
-import { AuthContext } from "../../context/AuthContext"
+import React, { useState, useContext } from 'react';
+import './booking.css';
+import { Form, FormGroup, ListGroup, ListGroupItem, Button } from 'reactstrap';
+import { useNavigate } from 'react-router-dom';
+import { AuthContext } from "../../context/AuthContext";
 import { BASE_URL } from "../../utils/config";
 
 const Booking = ({ tour, avgRating }) => {
     const { price, reviews, title } = tour;
     const navigate = useNavigate();
-
-    const { user } = useContext(AuthContext)
+    const { user } = useContext(AuthContext);
 
     const [booking, setBooking] = useState({
         userId: user && user._id,
@@ -17,43 +16,43 @@ const Booking = ({ tour, avgRating }) => {
         tourName: title,
         phone: '',
         guestSize: 1,
-        bootAt: ""
-    })
-
+        bookAt: "" 
+    });
 
     const handlechange = e => {
-        setBooking(prev => ({ ...prev, [e.target.id]: e.target.value }))
+        setBooking(prev => ({ ...prev, [e.target.id]: e.target.value }));
     };
 
-    const serviceFee = 10
-    const totalAmount = Number(price) * Number(booking.guestSize) + Number(serviceFee)
+    const serviceFee = 10;
+    const totalAmount = Number(price) * Number(booking.guestSize) + Number(serviceFee);
 
-
-    // send data to the server
+    // Send data to the server
     const handleClick = async e => {
         e.preventDefault();
-        
-        console.log(booking)
+
+        // console.log(booking);
 
         try {
             if (!user || user === undefined || user === null) {
-                return alert('Please Sign in')          
+                return alert('Please Sign in');
             }
-            const res = await fetch(`${BASE_URL}/booking`,{
-                method:'post',
-                headers:{
-                    "content-type":"application/json"
+
+            const res = await fetch(`${BASE_URL}/booking`, {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json"
                 },
-                credentials:"include",
-                body:JSON.stringify(booking)
-            })
-            const result = await res.json()
-            if(!res.ok){
-                alert(result.message)
+                credentials: "include",
+                body: JSON.stringify(booking)
+            });
+
+            const result = await res.json();
+            if (!res.ok) {
+                alert(result.message); 
             }
-            navigate("/thank-you")
+            navigate("/thank-you"); 
         } catch (err) {
-            alert(err.message);
+            alert(err.message); 
         }
     };
 
@@ -62,7 +61,7 @@ const Booking = ({ tour, avgRating }) => {
             <div className="booking__top d-flex align-items-center justify-content-between">
                 <h3>${price}<span>/per person</span></h3>
                 <span className="tour__rating d-flex align-items-center gap-1">
-                    <i class="ri-star-fill"></i>
+                    <i className="ri-star-fill"></i>
                     {avgRating === 0 ? null : avgRating} ({reviews?.length})
                 </span>
             </div>
@@ -72,25 +71,24 @@ const Booking = ({ tour, avgRating }) => {
                 <h5>Information</h5>
                 <Form className="booking__info-form" onSubmit={handleClick}>
                     <FormGroup>
-                        <input type="text" placeholder='Full Name' id='fullname' required onChange={handlechange} />
+                        <input type="text" placeholder="Full Name" id="fullName" required onChange={handlechange} />
                     </FormGroup>
                     <FormGroup>
-                        <input type="number" placeholder='Mobile Number' id='phone' required onChange={handlechange} />
+                        <input type="number" placeholder="Mobile Number" id="phone" required onChange={handlechange} />
                     </FormGroup>
                     <FormGroup className="d-flex align-items-center gap-3">
-                        <input type="date" placeholder='' id='bookAt' required onChange={handlechange} />
-                        <input type="number" placeholder='Guest' id='guestSize' required onChange={handlechange} />
+                        <input type="date" placeholder="" id="bookAt" required onChange={handlechange} />
+                        <input type="number" placeholder="Guest" id="guestSize" required onChange={handlechange} />
                     </FormGroup>
                 </Form>
             </div>
             {/* ======== booking end ======= */}
 
             {/* ========= booking bottom ========= */}
-
             <div className="booking__bottom">
                 <ListGroup>
                     <ListGroupItem className="border-0 px-0">
-                        <h5 className='d-flex align-items-center gap-1'>${price}<i class=" ri-close-line"></i>1 person</h5>
+                        <h5 className="d-flex align-items-center gap-1"> ${price}<i className="ri-close-line"></i>1 person</h5>
                         <span>${price}</span>
                     </ListGroupItem>
                     <ListGroupItem className="border-0 px-0">
@@ -102,10 +100,10 @@ const Booking = ({ tour, avgRating }) => {
                         <span>${totalAmount}</span>
                     </ListGroupItem>
                 </ListGroup>
-                <Button className='btn primary__btn w-100 mt-4' onClick={handleClick}>Book Now</Button>
+                <Button className="btn primary__btn w-100 mt-4" onClick={handleClick}>Book Now</Button>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default Booking
+export default Booking;

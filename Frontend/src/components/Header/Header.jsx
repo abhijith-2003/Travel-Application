@@ -49,7 +49,7 @@ const Header = () => {
     return window.removeEventListener('scroll', stickyHeaderFunc)
   }, [])
 
-   const toggleMenu = ()=> menuRef.current.classList.toggle('show__menu')
+  const toggleMenu = () => menuRef.current.classList.toggle('show__menu')
   return <header className="header" ref={headerRef}>
     <Container>
       <Row>
@@ -78,7 +78,10 @@ const Header = () => {
               {
                 user ? (
                   <>
-                    <h6 className='mb-3 '>{user.username.charAt(0).toUpperCase() + user.username.slice(1)}</h6>
+                    <h6 class="mb-4 border border-2 rounded-5 px-3 py-2">
+                      {user.username.charAt(0).toUpperCase() + user.username.slice(1)}
+                    </h6>
+
                     <Button className="btn primary__btn mb-4" onClick={logout}>Logout</Button>
                   </>
                 ) : (

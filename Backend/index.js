@@ -46,5 +46,5 @@ app.use("/api/v1/booking", bookingRoute);
 // Start server
 app.listen(port, () => {
   connect();
-  console.log(`Server running on port ${port}`);
+  console.log(`Server running on Port ${port}`);
 });

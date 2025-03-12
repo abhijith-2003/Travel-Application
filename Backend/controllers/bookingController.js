@@ -1,21 +1,29 @@
 import Booking from "../models/Booking.js";
 
-// booking tour
-export const createBooking= async(req,res) =>{
-    const newBooking = new Booking(req.body)
-    try
-    {
+// booking new tour
+export const createBooking = async (req, res) => {
+    const { userId, userEmail, tourName, phone, guestSize, bookAt } = req.body;
 
-        const savedBooking= await newBooking.save();
-        res.status(200).json({success:true,message:'Your tour is booked',
-         data:savedBooking})
-
-
-    }catch(err){
-        console.log(err);
-        res.status(500).json({success:false,message:'internal server error'})
+    // Basic input validation
+    if (!userId || !userEmail || !tourName || !phone || !guestSize || !bookAt) {
+        return res.status(400).json({ success: false, message: 'All fields are required' });
     }
-}
+
+    const newBooking = new Booking(req.body);
+
+    try {
+        const savedBooking = await newBooking.save();
+        res.status(200).json({
+            success: true,
+            message: 'Your tour is booked',
+            data: savedBooking,
+        });
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({ success: false, message: 'Internal server error' });
+    }
+};
+
 
 //get single booking
 export const getBooking = async(req,res) =>{

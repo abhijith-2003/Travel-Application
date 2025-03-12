@@ -84,6 +84,7 @@ const Booking = ({ tour, avgRating }) => {
             </div>
             {/* ======== booking end ======= */}
 
+
             {/* ========= booking bottom ========= */}
             <div className="booking__bottom">
                 <ListGroup>
